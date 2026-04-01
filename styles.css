@@ -1,0 +1,349 @@
+:root {
+    --primary-color: #ff9933; /* Saffron */
+    --secondary-color: #138808; /* Green */
+    --navy-blue: #000080; /* Ashoka Chakra */
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-main: #333333;
+    --text-muted: #6c757d;
+    --border-color: #ced4da;
+    --error-color: #dc3545;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card-header {
+    text-align: center;
+    padding: 30px 20px 20px;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.emblem-placeholder {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 10px;
+}
+
+.ashoka-chakra-icon {
+    width: 100%;
+    height: 100%;
+    animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.card-header h1 {
+    font-size: 1.5rem;
+    color: var(--navy-blue);
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.flag-banner {
+    display: flex;
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.saffron { background-color: var(--primary-color); flex: 1; }
+.white { background-color: #ffffff; flex: 1; }
+.green { background-color: var(--secondary-color); flex: 1; }
+
+form {
+    padding: 20px 30px 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.required {
+    color: var(--error-color);
+}
+
+input[type="text"],
+input[type="tel"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all var(--transition-speed);
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.2);
+}
+
+.readonly-input {
+    background-color: #e9ecef;
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.error-text {
+    color: var(--error-color);
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: none;
+}
+
+.form-group.has-error input,
+.form-group.has-error select {
+    border-color: var(--error-color);
+}
+
+.form-group.has-error .error-text {
+    display: block;
+}
+
+.photo-section {
+    position: relative;
+}
+
+.photo-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    border: none;
+    font-family: inherit;
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #e68a2e;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    flex: 1;
+}
+
+.btn-outline:hover {
+    background-color: rgba(255, 153, 51, 0.1);
+}
+
+.btn-large {
+    padding: 12px 24px;
+    font-size: 1.1rem;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.form-actions {
+    margin-top: 30px;
+}
+
+.spinner {
+    height: 20px;
+    width: 20px;
+    animation: rotate 2s linear infinite;
+}
+
+.spinner .path {
+    stroke: #ffffff;
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate { 100% { transform: rotate(360deg); } }
+@keyframes dash {
+    0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+    50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+    100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+}
+
+.photo-preview-container {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#photoPreview {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.icon-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+/* Modal for Camera */
+.camera-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.camera-container {
+    background: white;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+#cameraStream {
+    width: 100%;
+    border-radius: var(--border-radius);
+    background-color: #000;
+}
+
+.camera-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.camera-controls .btn {
+    flex: 1;
+}
+
+#resultCard {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.badge-display-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.responsive-badge {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: var(--shadow-lg);
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.result-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 30px;
+}
+
+.status-message {
+    padding: 0 30px;
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 480px) {
+    .photo-actions {
+        flex-direction: column;
+    }
+}
