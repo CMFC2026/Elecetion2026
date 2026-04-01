@@ -287,17 +287,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fillText(`${constituencySelect.value} Constituency`, CENTER, SIZE - 170);
 
                 // Resolve
-                resolve(badgeCanvas.toDataURL('image/png'));
+                resolve(badgeCanvas.toDataURL('image/jpeg', 0.8));
             };
             img.onerror = reject;
             img.src = selectedImageSrc;
         });
     }
 
-    // ---- Firebase Firestore & Storage Upload Logic ----
+    // ---- Firebase Firestore Upload Logic ----
     
     async function uploadPledgeData(badgeDataUrl) {
-        if (!db || !storage) {
+        if (!db) {
             console.log("Firebase is not configured, skipping cloud save.");
             return;
         }
@@ -310,30 +310,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const phoneStr = phoneInput.value.trim();
-            const timestamp = new Date().getTime();
             
-            // Generate a unique filename
-            const fileName = `badges/${phoneStr}_${timestamp}.png`;
-            const imageRef = ref(storage, fileName);
-
-            // Upload badge image as Base64 string
-            await uploadString(imageRef, badgeDataUrl, 'data_url');
-            
-            // Get public URL
-            const downloadUrl = await getDownloadURL(imageRef);
-
-            // Save metadata to Firestore
+            // Save metadata and the image data directly to Firestore (Bypasses Storage CORS issues entirely)
             await addDoc(collection(db, "pledges"), {
                 fullName: fullNameInput.value.trim(),
                 phone: phoneStr,
                 district: "Ramanathapuram",
                 constituency: constituencySelect.value,
-                badgeUrl: downloadUrl,
+                badgeImageData: badgeDataUrl, // Saved directly to database
                 createdAt: serverTimestamp()
             });
 
         } catch (e) {
-            console.error("Error saving to Firebase: ", e);
+            console.error("Error saving to Firebase DB: ", e);
             throw e;
         }
     }
