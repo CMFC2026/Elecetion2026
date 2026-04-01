@@ -215,76 +215,136 @@ document.addEventListener('DOMContentLoaded', () => {
             const CENTER = SIZE / 2;
             ctx.clearRect(0, 0, SIZE, SIZE);
 
-            // 1. Draw Background & Outer Ring (Indian Flag Colors Gradient)
-            const gradient = ctx.createLinearGradient(0, 0, SIZE, SIZE);
-            gradient.addColorStop(0, '#ff9933'); // Saffron
-            gradient.addColorStop(0.5, '#ffffff'); // White
-            gradient.addColorStop(1, '#138808'); // Green
-
+            // Create circular clip for the main badge
+            ctx.save();
             ctx.beginPath();
             ctx.arc(CENTER, CENTER, 390, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.clip();
+            
+            // Draw Saffron Top
+            ctx.fillStyle = '#ff9933';
+            ctx.fillRect(0, 0, SIZE, 266);
+            
+            // Draw White Middle
             ctx.fillStyle = '#ffffff';
-            ctx.fill();
+            ctx.fillRect(0, 266, SIZE, 268);
+            
+            // Draw Green Bottom
+            ctx.fillStyle = '#138808';
+            ctx.fillRect(0, 534, SIZE, 266);
+            
+            ctx.restore();
+            
+            // Draw outer white ring for dimension
+            ctx.beginPath();
+            ctx.arc(CENTER, CENTER, 390, 0, Math.PI * 2);
             ctx.lineWidth = 15;
-            ctx.strokeStyle = gradient;
+            ctx.strokeStyle = '#ffffff';
             ctx.stroke();
 
-            // Inner styling ring
+            // Saffron elements
+            // SVEEP box
+            ctx.fillStyle = '#ffffff';
             ctx.beginPath();
-            ctx.arc(CENTER, CENTER, 370, 0, Math.PI * 2);
-            ctx.lineWidth = 5;
-            ctx.strokeStyle = '#000080'; // Ashoka Chakra Blue
+            if (ctx.roundRect) {
+                ctx.roundRect(140, 160, 140, 50, 10);
+            } else {
+                ctx.rect(140, 160, 140, 50);
+            }
+            ctx.fill();
+            ctx.font = 'bold 24px Roboto, sans-serif';
+            ctx.fillStyle = '#000000';
+            ctx.textAlign = 'center';
+            ctx.fillText('SVEEP', 210, 193);
+
+            // DISTRICT box (Using input value)
+            const distName = document.getElementById('district').value || "RAMANATHAPURAM";
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            if (ctx.roundRect) {
+                ctx.roundRect(520, 160, 160, 50, 10);
+            } else {
+                ctx.rect(520, 160, 160, 50);
+            }
+            ctx.fill();
+            ctx.font = 'bold 16px Roboto, sans-serif';
+            ctx.fillStyle = '#000000';
+            ctx.fillText(distName.toUpperCase(), 600, 185);
+            ctx.fillText('DISTRICT', 600, 202);
+
+            // ECI Logo placeholder (center)
+            ctx.beginPath();
+            ctx.arc(400, 185, 45, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#000080';
             ctx.stroke();
+            ctx.font = 'bold 20px Roboto, sans-serif';
+            ctx.fillStyle = '#000080';
+            ctx.fillText('ECI', 400, 192);
 
             // 2. Draw user photo in the center
             const img = new Image();
             img.onload = () => {
-                const imgSize = 360; // photo radius 180
+                const imgSize = 440; // diameter
                 
                 ctx.save();
                 ctx.beginPath();
-                ctx.arc(CENTER, CENTER - 50, 180, 0, Math.PI * 2);
+                ctx.arc(CENTER, 480, 220, 0, Math.PI * 2);
                 ctx.closePath();
-                ctx.clip(); // clip to circle
-
+                ctx.clip(); // clip to inner circle
+                
                 // calculate to crop center of image
                 const ratio = Math.max(imgSize / img.width, imgSize / img.height);
                 const drawWidth = img.width * ratio;
                 const drawHeight = img.height * ratio;
                 const dx = CENTER - drawWidth / 2;
-                const dy = (CENTER - 50) - drawHeight / 2;
+                const dy = 480 - drawHeight / 2;
+                
+                // Draw white background in case image is transparent
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, SIZE, SIZE);
                 
                 ctx.drawImage(img, dx, dy, drawWidth, drawHeight);
+
+                // Add dark blue chord at bottom of inner circle
+                // We are still clipped to the inner circle!
+                ctx.beginPath();
+                ctx.fillStyle = '#000080';
+                ctx.fillRect(0, 560, SIZE, 200); // Only fills within the clipped bottom part
+                
+                // Add texts inside the blue chord
+                ctx.fillStyle = '#ffffff';
+                ctx.textAlign = 'center';
+                ctx.font = 'bold 20px Roboto, sans-serif';
+                ctx.fillText("I'LL VOTE 100%", CENTER, 590);
+                
+                ctx.font = 'bold 24px Roboto, sans-serif';
+                ctx.fillText("MY VOTE MY PRIDE", CENTER, 625);
+                
                 ctx.restore();
 
-                // Draw border for photo ring
+                // Draw thick white border for photo ring
                 ctx.beginPath();
-                ctx.arc(CENTER, CENTER - 50, 180, 0, Math.PI * 2);
-                ctx.lineWidth = 8;
-                ctx.strokeStyle = '#ff9933';
+                ctx.arc(CENTER, 480, 220, 0, Math.PI * 2);
+                ctx.lineWidth = 15;
+                ctx.strokeStyle = '#ffffff';
                 ctx.stroke();
 
-                // 3. Draw Texts
+                // Add faint shadow mapping via arc again
+                ctx.beginPath();
+                ctx.arc(CENTER, 480, 225, 0, Math.PI * 2);
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+                ctx.stroke();
+
+                // 3. Draw Green Area Text
                 ctx.textAlign = 'center';
-                
-                // Top Text
-                ctx.font = 'bold 45px Roboto, sans-serif';
-                ctx.fillStyle = '#138808';
-                ctx.fillText("I'LL VOTE 100%", CENTER, 90);
-
-                // Bottom text (My Vote My Pride)
-                ctx.font = '900 60px Roboto, sans-serif';
-                ctx.fillStyle = '#000080';
-                ctx.fillText("MY VOTE MY PRIDE", CENTER, SIZE - 120);
-
-                // User data
-                ctx.font = 'bold 35px Roboto, sans-serif';
-                ctx.fillStyle = '#333';
-                ctx.fillText(fullNameInput.value.trim().toUpperCase(), CENTER, SIZE - 210);
-
-                ctx.font = 'normal 26px Roboto, sans-serif';
-                ctx.fillStyle = '#666';
-                ctx.fillText(`${constituencySelect.value} Constituency`, CENTER, SIZE - 170);
+                ctx.font = 'bold 24px Roboto, sans-serif';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText("VOTING DAY : 20-04-2026", CENTER, 750);
 
                 // Resolve
                 resolve(badgeCanvas.toDataURL('image/jpeg', 0.8));
