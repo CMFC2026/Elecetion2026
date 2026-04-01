@@ -1,8 +1,8 @@
 [
   {
-    "origin": ["*"],
-    "method": ["GET", "HEAD", "DELETE", "POST", "PUT"],
-    "responseHeader": ["Content-Type"],
+    "origin": ["*", "https://elecetion2026.vercel.app"],
+    "method": ["GET", "HEAD", "DELETE", "POST", "PUT", "OPTIONS"],
+    "responseHeader": ["*"],
     "maxAgeSeconds": 3600
   }
 ]
