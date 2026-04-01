@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pledge of 100% Voting</title>
     <meta name="description" content="Pledge your commitment to vote and generate your personalized voting badge.">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <!-- Firebase Scripts (v10 modular via CDN) -->
     <script type="module" src="app.js" defer></script>
 </head>
+
 <body>
-    <div class="container">
+    <div class="container container-clean">
         <!-- Form Section -->
         <main class="card" id="formCard">
             <header class="card-header">
@@ -32,19 +34,15 @@
                         </g>
                     </svg>
                 </div>
-                <h1>Pledge of 100% Voting</h1>
-                <p class="subtitle">My Vote My Right</p>
-                <div class="flag-banner">
-                    <div class="saffron"></div>
-                    <div class="white"></div>
-                    <div class="green"></div>
-                </div>
+                <h1 class="handwritten-title">Pledge of 100% Voting</h1>
+                <p class="subtitle handwritten-subtitle">"My Vote My Right"</p>
             </header>
-            
+
             <form id="pledgeForm" novalidate>
                 <div class="form-group">
                     <label for="district">District</label>
-                    <input type="text" id="district" name="district" value="Ramanathapuram" readonly class="readonly-input">
+                    <input type="text" id="district" name="district" value="Ramanathapuram" readonly
+                        class="readonly-input">
                 </div>
 
                 <div class="form-group">
@@ -61,13 +59,15 @@
 
                 <div class="form-group">
                     <label for="fullName">Full Name <span class="required">*</span></label>
-                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required autocomplete="name">
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required
+                        autocomplete="name">
                     <div class="error-text" id="nameError">Please enter your full name</div>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone Number <span class="required">*</span></label>
-                    <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required autocomplete="tel">
+                    <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}"
+                        maxlength="10" required autocomplete="tel">
                     <div class="error-text" id="phoneError">Please enter a valid 10-digit phone number</div>
                 </div>
 
@@ -75,9 +75,16 @@
                     <label>Your Photo <span class="required">*</span></label>
                     <div class="photo-preview-container" id="photoPreviewContainer" style="display: none;">
                         <img id="photoPreview" src="" alt="Photo Preview">
-                        <button type="button" class="btn btn-secondary icon-btn" id="retakeBtn" aria-label="Retake Photo">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/><path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/></svg>
-                             Retake/Re-upload
+                        <button type="button" class="btn btn-secondary icon-btn" id="retakeBtn"
+                            aria-label="Retake Photo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+                                <path fill-rule="evenodd"
+                                    d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
+                            </svg>
+                            Retake/Re-upload
                         </button>
                     </div>
 
@@ -85,16 +92,28 @@
                         <!-- We will use a fallback file input behind the button -->
                         <input type="file" id="fileInput" accept="image/*" style="display: none;">
                         <button type="button" class="btn btn-outline" id="uploadFileBtn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                <path
+                                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                            </svg>
                             Upload File
                         </button>
                         <button type="button" class="btn btn-outline" id="takePhotoBtn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/><path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z" />
+                                <path
+                                    d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
+                            </svg>
                             Take Photo
                         </button>
                     </div>
                     <div class="error-text" id="photoError">Please provide your photo</div>
-                    
+
                     <!-- Camera Stream Modal -->
                     <div id="cameraModal" class="camera-modal">
                         <div class="camera-container">
@@ -111,7 +130,9 @@
 
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary btn-large btn-block" id="generateBtn">
-                        <svg class="spinner" viewBox="0 0 50 50" style="display: none;"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
+                        <svg class="spinner" viewBox="0 0 50 50" style="display: none;">
+                            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                        </svg>
                         <span class="btn-text">Generate Badge</span>
                     </button>
                 </div>
@@ -120,26 +141,27 @@
         </main>
 
         <!-- Result Section (Initially hidden) -->
-        <main class="card" id="resultCard" style="display: none;">
-            <header class="card-header">
-                <h2>Your Voting Pledge Badge</h2>
-                <p>Thank you for pledging! Download and share your pride.</p>
+        <main class="card result-card-clean" id="resultCard" style="display: none;">
+            <header class="card-header border-0">
+                <h2 class="handwritten-title">User Registration</h2>
             </header>
             
-            <div class="badge-display-container">
-                <canvas id="badgeCanvas" width="800" height="800" style="display:none;"></canvas>
-                <!-- Display image representation of canvas for responsiveness -->
-                <img id="badgeImage" src="" alt="Your Voting Badge" class="responsive-badge">
+            <div class="result-box">
+                <div class="badge-display-container">
+                    <canvas id="badgeCanvas" width="800" height="800" style="display:none;"></canvas>
+                    <img id="badgeImage" src="" alt="Your Voting Badge" class="responsive-badge">
+                </div>
             </div>
 
-            <div class="form-actions result-actions">
-                <a href="#" class="btn btn-primary btn-large" id="downloadBadgeBtn" download="My_Voting_Pledge.png">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            <div class="form-actions row-actions">
+                <button type="button" class="btn btn-outline edit-btn" id="makeAnotherBtn">Edit Form</button>
+                <a href="#" class="btn btn-success download-btn" id="downloadBadgeBtn" download="My_Voting_Pledge.png">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
                     Download Badge
                 </a>
-                <button type="button" class="btn btn-outline" id="makeAnotherBtn">Make Another Pledge</button>
             </div>
         </main>
     </div>
 </body>
+
 </html>
