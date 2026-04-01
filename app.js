@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.textAlign = 'center';
                 ctx.font = 'bold 24px Roboto, sans-serif';
                 ctx.fillStyle = '#ffffff';
-                ctx.fillText("VOTING DAY : 20-04-2026", CENTER, 750);
+                ctx.fillText("VOTING DAY : 23 APRIL 2026", CENTER, 750);
 
                 // Resolve
                 resolve(badgeCanvas.toDataURL('image/jpeg', 0.8));
